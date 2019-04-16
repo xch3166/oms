@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html xmlns:th="http://www.thymeleaf.org" lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html xmlns:th="http://www.thymeleaf.org" lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>人员管理 - 澜达管理系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="michael" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/pages/css/image-crop.min.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/webuploader.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME LAYOUT STYLES -->
+
+</head>
+<!-- END HEAD -->
+
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+<div class="page-wrapper">
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-fixed-top" th:include="/include/header"></div>
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper" th:include="/include/sidebar" th:with="a=${9}, b=${0}"></div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-settings font-green"></i>
+                            <span class="caption-subject font-green sbold uppercase">人员</span>
+                        </div>
+                        <div class="actions">
+                            <div class="btn-group">
+                                <a class="btn green-haze btn-outline btn-circle btn-sm" href="/personal/list"> 返回
+                                    <i class="fa fa-reply"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <form class="form-horizontal" name="theform" id="theform" action="/personal/save" role="form" method="post" th:object="${personal}">
+                            <div class="form-body">
+                                <div class="alert alert-danger display-hide">
+                                    <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
+                                <div class="alert alert-success display-hide">
+                                    <button class="close" data-close="alert"></button> Your form validation is successful! </div>
+                                <h4 class="form-section">基本信息</h4>
+                                <div class="form-group  margin-top-20">
+                                    <label class="col-md-3 control-label">姓名</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="name" placeholder="姓名" th:value="*{name}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">性别</label>
+                                    <div class="col-md-7">
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio">
+                                                <input type="radio" name="gender" value="1" th:checked="${personal.gender==1 || personal.gender==null}" > 男
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio">
+                                                <input type="radio" name="gender" value="0" th:checked="${personal.gender==0}"> 女
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">民族</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="nationality" placeholder="民族" th:value="*{nationality}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">电话</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="tel" placeholder="电话" th:value="*{tel}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">邮箱</label>
+                                    <div class="col-md-7">
+                                        <div class="input-group">
+                                            <input type="email" class="form-control" name="email" placeholder="邮箱" th:value="*{email}">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">家庭住址</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="address" placeholder="家庭住址" th:value="*{address}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">身份证</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="idCard" placeholder="身份证" th:value="*{idCard}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3 col-md-offset-3">
+                                        <div class="upload-img">
+                                            <img th:src="*{cardFront}" th:hidden="${personal.cardFront==null}" style="width: 300px; margin-bottom: 10px;">
+                                            <input type="hidden" name="cardFront"  th:value="*{cardFront}">
+                                            <div class="filePicker">上传身份证正面</div>
+                                            <div class="progress" style="display: none;">
+                                                <span class="text">0%</span>
+                                                <span class="percentage"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="upload-img">
+                                            <img th:src="*{cardBack}" th:hidden="${personal.cardBack==null}" style="width: 300px; margin-bottom: 10px;">
+                                            <input type="hidden" name="cardBack"  th:value="*{cardBack}">
+                                            <div class="filePicker">上传身份证背面</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">出生日期</label>
+                                    <div class="col-md-1">
+                                        <select name="yy" id="yy" class="form-control col-md-2" onChange="yyDD(this.value)" th:value="*{yy}"></select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <select name="mm" id="mm" class="form-control col-md-2" onChange="MMDD(this.value)" th:value="*{mm}"></select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <select name="dd" id="dd" class="form-control col-md-2" onChange="DDD(this.value)" th:value="*{dd}"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">生日</label>
+                                    <div class="col-md-2">
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio">
+                                                <input type="radio" name="birthdayType" value="0" th:checked="${personal.birthdayType==0 || personal.birthdayType==null}" > 阴历
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio">
+                                                <input type="radio" name="birthdayType" value="1" th:checked="${personal.birthdayType==1}"> 阳历
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">籍贯</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="birthplace" placeholder="籍贯" th:value="*{birthplace}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">户口性质</label>
+                                    <div class="col-md-7">
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio">
+                                                <input type="radio" name="account" value="1" th:checked="${personal.account==1 || personal.account==null}" > 农业户口
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio">
+                                                <input type="radio" name="account" value="0" th:checked="${personal.account==0}"> 非农业户口
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">婚姻状况</label>
+                                    <div class="col-md-7">
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio">
+                                                <input type="radio" name="marriage" value="1" th:checked="${personal.marriage==1 || personal.marriage==null}" > 已婚
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio">
+                                                <input type="radio" name="marriage" value="0" th:checked="${personal.marriage==0}"> 未婚
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">护照号</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="passPort" placeholder="护照号" th:value="*{passPort}">
+                                    </div>
+                                </div>
+                                <h4 class="form-section">工作信息</h4>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">公司</label>
+                                    <div class="col-md-7">
+                                        <select class="form-control" name="company" th:value="*{company}" id="company">
+                                            <option th:each="c : ${companies}"
+                                                    th:value="${c.id}"
+                                                    th:text="${c.name}"
+                                                    th:selected="${c.id == (personal.company==null?'0':personal.company.id)}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">职位</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="position" placeholder="职位" th:value="*{position}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">入职时间</label>
+                                    <div class="col-md-7">
+                                        <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" >
+                                            <input type="text" class="form-control" name="entryTime" th:value="*{entryTime}" readonly>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">劳动合同期限</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="contractPeriod" placeholder="劳动合同期限" th:value="*{contractPeriod}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">劳动合同开始时间</label>
+                                    <div class="col-md-7">
+                                        <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" >
+                                            <input type="text" class="form-control" name="contractStartDate" th:value="*{contractStartDate}" readonly>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">劳动合同结束时间</label>
+                                    <div class="col-md-7">
+                                        <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" >
+                                            <input type="text" class="form-control" name="contractEndDate" th:value="*{contractEndDate}" readonly>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">开始工作时间</label>
+                                    <div class="col-md-7">
+                                        <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" >
+                                            <input type="text" class="form-control" name="startWorkingTime" th:value="*{startWorkingTime}" readonly>
+                                            <span class="input-group-btn">
+                                                <button class="btn default" type="button">
+                                                    <i class="fa fa-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">工作经历</label>
+                                    <div class="col-md-7">
+                                        <textarea class="form-control" rows="6" name="workExperience" placeholder="工作经历" th:text="*{workExperience}"></textarea>
+                                    </div>
+                                </div>
+                                <h4 class="form-section">教育信息</h4>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">学历</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="education" placeholder="学历" th:value="*{education}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">学历性质</label>
+                                    <div class="col-md-7">
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio">
+                                                <input type="radio" name="nature" value="0" th:checked="${personal.nature==0 || personal.nature==null}" > 统招
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio">
+                                                <input type="radio" name="nature" value="1" th:checked="${personal.nature==1}"> 函授
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio">
+                                                <input type="radio" name="nature" value="2" th:checked="${personal.nature==2}"> 成人高考
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">毕业院校</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="school" placeholder="毕业院校" th:value="*{school}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">专业</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="major" placeholder="专业" th:value="*{major}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">证书</label>
+                                    <div class="col-md-3">
+                                        <div class="upload-img">
+                                            <img th:src="*{diploma}" th:hidden="${personal.diploma==null}" style="width: 300px; margin-bottom: 10px;">
+                                            <input type="hidden" name="diploma"  th:value="*{diploma}">
+                                            <div class="filePicker">毕业证</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="upload-img">
+                                            <img th:src="*{degree}" th:hidden="${personal.degree==null}" style="width: 300px; margin-bottom: 10px;">
+                                            <input type="hidden" name="degree"  th:value="*{degree}">
+                                            <div class="filePicker">学位证</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="upload-img">
+                                            <img th:src="*{other}" th:hidden="${personal.other==null}" style="width: 300px; margin-bottom: 10px;">
+                                            <input type="hidden" name="other"  th:value="*{other}">
+                                            <div class="filePicker">其他</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4 class="form-section">紧急联系人信息</h4>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">紧急联系人</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="contact" placeholder="紧急联系人" th:value="*{contact}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">紧急联系人电话</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" name="contactTel" placeholder="紧急联系人电话" th:value="*{contactTel}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">状态</label>
+                                    <div class="col-md-7">
+                                        <div class="mt-radio-inline">
+                                            <label class="mt-radio">
+                                                <input type="radio" name="state" value="1" th:checked="${personal.state==1 || personal.state==null}" > 启用
+                                                <span></span>
+                                            </label>
+                                            <label class="mt-radio">
+                                                <input type="radio" name="state" value="0" th:checked="${personal.state==0}"> 禁用
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-8">
+                                        <button type="submit" class="btn green">保存</button>
+                                        <a href="/personal/list" class="btn default">取消</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="id" th:value="*{id}">
+                            <input type="hidden" name="birthday" th:value="*{birthday}">
+                            <input type="hidden" id="y" th:value="*{yy}">
+                            <input type="hidden" id="m" th:value="*{mm}">
+                            <input type="hidden" id="d" th:value="*{dd}">
+                            <input type="hidden" name="user" th:value="${personal.user.id}" th:if="${personal.user!=null}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer" th:include="/include/footer"></div>
+    <!-- END FOOTER -->
+</div>
+<!--[if lt IE 9]>
+<script src="/assets/global/plugins/respond.min.js"></script>
+<script src="/assets/global/plugins/excanvas.min.js"></script>
+<script src="/assets/global/plugins/ie8.fix.min.js"></script>
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+<script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="/assets/global/scripts/app.min.js" type="text/javascript"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<script src="/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+<script src="/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+<!-- END THEME LAYOUT SCRIPTS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jcrop/js/jquery.color.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jcrop/js/jquery.Jcrop.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>
+<script src="/assets/pages/scripts/form-image-crop.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<script src="/js/webuploader.nolog.min.js"></script>
+<script>
+   uploader = new Array();
+   $('.upload-img').each(function (index) {
+       var img = $(this).find('img');
+       var input = $(this).find('input');
+       var filePicker =$(this).find('.filePicker');
+
+       uploader[index] = WebUploader.create({
+           auto: true,
+           server: '/upload',
+           pick: {
+               id: filePicker,
+               class: filePicker,
+               label: filePicker.text()
+           },
+
+           // 只允许选择图片文件。
+           accept: {
+               title: 'Images',
+               extensions: 'gif,jpg,jpeg,bmp,png',
+               mimeTypes: 'image/*'
+           }
+       });
+       uploader[index].on( 'uploadSuccess', function( file , response) {
+           input.val(response.url);
+           img.attr('src',response.url);
+           img.show();
+       });
+       uploader[index].on( 'fileQueued', function( file ) {
+
+       });
+   });
+
+   var changeDD = 1;//->一个全局变量
+   function yyMMDDstart() {
+       MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+       //先给年下拉框赋内容
+       var y = new Date().getFullYear();
+       for (var i = y; i > y-99; i--){
+           document.theform.yy.options.add(new Option(i, i));
+       }
+
+       //赋月份的下拉框
+       for (var i = 1; i < 13; i++)
+           document.theform.mm.options.add(new Option(i, i));
+           document.theform.yy.value = y;
+           document.theform.mm.value = new Date().getMonth() + 1;
+           var n = MonHead[new Date().getMonth()];
+           if (new Date().getMonth() == 1 && IsPinYear(yy.value)) n++;
+           writeDay(n);
+   }
+
+   function yyDD(str) //年发生变化时日期发生变化(主要是判断闰平年)
+   {
+       var MMvalue = document.theform.mm.options[document.theform.mm.selectedIndex].value;
+       if (MMvalue == "") {
+           optionsClear(e);
+           return;
+       }
+       var n = MonHead[MMvalue - 1];
+       if (MMvalue == 2 && IsPinYear(str)) n++;
+       writeDay(n)
+   }
+
+   function MMDD(str) //月发生变化时日期联动
+   {
+       var yyvalue = document.theform.yy.options[document.theform.yy.selectedIndex].value;
+       if (yyvalue == "") {
+           var e = document.theform.dd;
+           optionsClear(e);
+           return;
+       }
+       var n = MonHead[str - 1];
+       if (str == 2 && IsPinYear(yyvalue)) n++;
+       writeDay(n)
+   }
+
+   //据条件写日期的下拉框
+   function writeDay(n){
+       var e = document.theform.dd;
+       optionsClear(e);
+       for (var i = 1; i < (n + 1); i++){
+           e.options.add(new Option(i, i));
+           if(i == changeDD){
+               e.options[i].selected = true;  //->保持选中状态
+           }
+       }
+   }
+
+   //判断是否闰平年
+   function IsPinYear(year){
+       return (0 == year % 4 && (year % 100 != 0 || year % 400 == 0));
+   }
+
+   function optionsClear(e) {
+       e.options.length = 1;
+   }
+   //->随时监听日的改变
+   function DDD(str){
+       changeDD = str;
+   }
+
+   yyMMDDstart();
+
+   $('#yy').val($('#y').val());
+   $('#mm').val($('#m').val());
+   $('#dd').val($('#d').val());
+
+</script>
+</body>
+
+</html>

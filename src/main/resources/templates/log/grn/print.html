@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    table {
+        width: 80%;
+        text-indent: 0;
+        margin: 0 auto;
+        border: 1px solid #dadada;
+    }
+
+    table td {
+        background: #fff;
+        padding: 10px;
+        word-break: break-all;
+        border-top: 1px solid #dadada;
+        border-right: 1px solid #dadada;
+    }
+
+    table th {
+        background: #fff;
+        padding-top: 30px;
+        padding-bottom: 20px;
+        text-align: center;
+    }
+    .br0{
+        border-right: 0;
+    }
+</style>
+<table th:object="${grn}">
+    <tr>
+        <th colspan="10">山东澜达石油设备有限公司入库单</th>
+    </tr>
+    <tr>
+        <td colspan="8">供货单位：<span th:text="*{supplier.name}"></span></td>
+        <td colspan="2" class="br0">入库时间：<span th:text="*{logDate}"></span></td>
+    </tr>
+    <tr>
+        <td colspan="8">合同编号：<span th:text="*{contractNo}"></span></td>
+        <td colspan="2" class="br0">入库单编号：<span th:text="*{id}"></span></td>
+    </tr>
+    <tr>
+        <td>序号</td>
+        <td>商品编号</td>
+        <td>品名</td>
+        <td>规格</td>
+        <td>单位</td>
+        <td>数量</td>
+        <td>不含税单价</td>
+        <td>含税单价</td>
+        <td>不含税金额</td>
+        <td class="br0">含税金额</td>
+    </tr>
+    <tr th:each="detail : ${grn.details}">
+        <td th:text="${detailStat.count}"></td>
+        <td th:text="${detail.no}"></td>
+        <td th:text="${detail.name}"></td>
+        <td th:text="${detail.spec}"></td>
+        <td th:text="${detail.unit}"></td>
+        <td th:text="${detail.amount}"></td>
+        <td th:text="${detail.price}"></td>
+        <td th:text="${detail.priceTax}"></td>
+        <td th:text="${detail.total}"></td>
+        <td th:text="${detail.totalTax}" class="br0"></td>
+    </tr>
+    <tr>
+        <td colspan="10" class="br0">金额合计：<span th:text="*{total}"></span></td>
+    </tr>
+    <tr>
+        <td colspan="4">仓库：<span th:text="*{warehouse}"></span></td>
+        <td colspan="3">审核人：</td>
+        <td colspan="3" class="br0">制单人: </td>
+    </tr>
+</table>
+</html>

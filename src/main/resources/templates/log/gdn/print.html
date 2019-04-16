@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    table {
+        width: 80%;
+        text-indent: 0;
+        margin: 0 auto;
+        border: 1px solid #dadada;
+    }
+
+    table td {
+        background: #fff;
+        padding: 10px;
+        word-break: break-all;
+        border-top: 1px solid #dadada;
+        border-right: 1px solid #dadada;
+    }
+
+    table th {
+        background: #fff;
+        padding-top: 30px;
+        padding-bottom: 20px;
+        text-align: center;
+    }
+    .br0{
+        border-right: 0;
+    }
+</style>
+<table th:object="${gdn}">
+    <tr>
+        <th colspan="10">山东澜达石油设备有限公司出库单</th>
+    </tr>
+    <tr>
+        <td colspan="8">送货单位：<span th:text="*{client.name}"></span></td>
+        <td colspan="2" class="br0">出库时间：<span th:text="*{logDate}"></span></td>
+    </tr>
+    <tr>
+        <td colspan="8">送货地址：<span th:text="*{address}"></span></td>
+        <td colspan="2" class="br0">出库单编号：<span th:text="*{id}"></span></td>
+    </tr>
+    <tr>
+        <td>序号</td>
+        <td>商品编号</td>
+        <td>品名</td>
+        <td>规格</td>
+        <td>单位</td>
+        <td>数量</td>
+        <td>不含税单价</td>
+        <td>含税单价</td>
+        <td>不含税金额</td>
+        <td class="br0">含税金额</td>
+    </tr>
+    <tr th:each="detail : ${gdn.details}">
+        <td th:text="${detailStat.count}"></td>
+        <td th:text="${detail.no}"></td>
+        <td th:text="${detail.name}"></td>
+        <td th:text="${detail.spec}"></td>
+        <td th:text="${detail.unit}"></td>
+        <td th:text="${detail.amount}"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="br0"></td>
+    </tr>
+    <tr>
+        <td colspan="10" class="br0">金额合计：</td>
+    </tr>
+    <tr>
+        <td colspan="4">仓库：<span th:text="*{warehouse}"></span></td>
+        <td colspan="3">领料人：</td>
+        <td colspan="3" class="br0">签收人: </td>
+    </tr>
+</table>
+</html>

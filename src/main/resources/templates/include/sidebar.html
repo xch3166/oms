@@ -1,0 +1,370 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" >
+<!-- BEGIN SIDEBAR -->
+<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+<!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+<div class="page-sidebar navbar-collapse collapse"  th:fragment="nav(a,b)">
+    <!-- BEGIN SIDEBAR MENU -->
+    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+        <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        <li class="sidebar-toggler-wrapper hide">
+            <div class="sidebar-toggler">
+                <span></span>
+            </div>
+        </li>
+        <!-- END SIDEBAR TOGGLER BUTTON -->
+        <li class="nav-item start" th:classappend="${a==0}? ' open'">
+            <a href="/" class="nav-link">
+                <i class="icon-home"></i>
+                <span class="title">主页</span>
+                <span class="selected" th:if="${b==0}"></span>
+            </a>
+        </li>
+        <li class="nav-item" th:classappend="${a==1}? ' active open'">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-layers"></i>
+                <span class="title">基础信息</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item" th:classappend="${b==0}? ' active open'">
+                    <a href="/base/list" class="nav-link ">
+                        <span class="title">基地</span>
+                        <span class="selected" th:if="${b==0}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==1}? ' active open'">
+                    <a href="/well/list" class="nav-link ">
+                        <span class="title">回注井</span>
+                        <span class="selected" th:if="${b==1}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==2}? ' active open'">
+                    <a href="/equipment/list" class="nav-link ">
+                        <span class="title">设备</span>
+                        <span class="selected" th:if="${b==2}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==3}? ' active open'">
+                    <a href="/module/list" class="nav-link ">
+                        <span class="title">模块</span>
+                        <span class="selected" th:if="${b==3}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==4}? ' active open'">
+                    <a href="/parts/list" class="nav-link ">
+                        <span class="title">配件</span>
+                        <span class="selected" th:if="${b==4}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==5}? ' active open'">
+                    <a href="/partsType/list" class="nav-link ">
+                        <span class="title">配件类别</span>
+                        <span class="selected" th:if="${b==5}"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item" th:classappend="${a==2}? ' active open'">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-notebook"></i>
+                <span class="title">工作记录</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item" th:classappend="${b==0}? ' active open'">
+                    <a href="/injection/list" class="nav-link ">
+                        <span class="title">回注记录</span>
+                        <span class="selected" th:if="${b==0}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==1}? ' active open'">
+                    <a href="/service/list" class="nav-link ">
+                        <span class="title">维护记录</span>
+                        <span class="selected" th:if="${b==1}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==2}? ' active open'">
+                    <a href="/operation/list" class="nav-link ">
+                        <span class="title">设备运行记录</span>
+                        <span class="selected" th:if="${b==2}"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item" th:classappend="${a==3}? ' active open'">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-lock"></i>
+                <span class="title">安全管理</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item" th:classappend="${b==0}? ' active open'">
+                    <a href="/safety/list" class="nav-link ">
+                        <span class="title">连续安全运行</span>
+                        <span class="selected" th:if="${b==0}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==1}? ' active open'">
+                    <a href="/accident/list" class="nav-link ">
+                        <span class="title">安全事故</span>
+                        <span class="selected" th:if="${b==1}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==2}? ' active open'">
+                    <a href="/safetyTraining/list" class="nav-link ">
+                        <span class="title">安全培训</span>
+                        <span class="selected" th:if="${b==2}"></span>
+                    </a>
+                </li>
+                <!--<li class="nav-item">-->
+                    <!--<a href="layout_blank_page.html" class="nav-link ">-->
+                        <!--<span class="title">隐患识别</span>-->
+                        <!--<span class="selected"></span>-->
+                    <!--</a>-->
+                <!--</li>-->
+            </ul>
+        </li>
+        <shiro:authenticated>
+        <li class="nav-item" th:classappend="${a==4}? ' active open'">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-layers"></i>
+                <span class="title">产品管理</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item" th:classappend="${b==0}? ' active open'">
+                    <a href="/product/list" class="nav-link ">
+                        <span class="title">产品管理</span>
+                        <span class="selected" th:if="${b==0}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==1}? ' active open'">
+                    <a href="/productCategory/list" class="nav-link ">
+                        <span class="title">产品类别</span>
+                        <span class="selected" th:if="${b==1}"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        </shiro:authenticated>
+        <shiro:hasPermission name="view_store">
+        <li class="nav-item" th:classappend="${a==5}? ' active open'">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-layers"></i>
+                <span class="title">库存管理</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item" th:classappend="${b==0}? ' active open'">
+                    <a href="/inventory/list" class="nav-link ">
+                        <span class="title">库存管理</span>
+                        <span class="selected" th:if="${b==0}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==1}? ' active open'">
+                    <a href="/grn/list" class="nav-link ">
+                        <span class="title">入库单</span>
+                        <span class="selected" th:if="${b==1}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==2}? ' active open'">
+                    <a href="/gdn/list" class="nav-link ">
+                        <span class="title">出库单</span>
+                        <span class="selected" th:if="${b==2}"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="view_purchase">
+        <li class="nav-item" th:classappend="${a==6}? ' active open'">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-basket"></i>
+                <span class="title">采购管理</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item" th:classappend="${b==0}? ' active open'">
+                    <a href="/contract/purchase/list" class="nav-link ">
+                        <span class="title">采购合同</span>
+                        <span class="selected" th:if="${b==0}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==1}? ' active open'">
+                    <a href="/supplier/list" class="nav-link ">
+                        <span class="title">供应商</span>
+                        <span class="selected" th:if="${b==1}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==2}? ' active open'">
+                    <a href="/contract/detail/purchase" class="nav-link ">
+                        <span class="title">物料清单</span>
+                        <span class="selected" th:if="${b==2}"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="view_sell">
+        <li class="nav-item" th:classappend="${a==7}? ' active open'">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-diamond"></i>
+                <span class="title">销售管理</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item" th:classappend="${b==0}? ' active open'">
+                    <a href="/contract/sell/list" class="nav-link ">
+                        <span class="title">销售合同</span>
+                        <span class="selected" th:if="${b==0}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==1}? ' active open'">
+                    <a href="/client/list" class="nav-link ">
+                        <span class="title">客户</span>
+                        <span class="selected" th:if="${b==1}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==2}? ' active open'">
+                    <a href="/contract/detail/sell" class="nav-link ">
+                        <span class="title">物料查询</span>
+                        <span class="selected" th:if="${b==2}"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        </shiro:hasPermission>
+        <li class="nav-item" th:classappend="${a==8}? ' active open'">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-briefcase"></i>
+                <span class="title">日常办公</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item" th:classappend="${b==0}? ' active open'">
+                    <a href="/notice/list" class="nav-link ">
+                        <span class="title">通知公告</span>
+                        <span class="selected" th:if="${b==0}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==1}? ' active open'">
+                    <a href="/leave/list" class="nav-link ">
+                        <span class="title">请假管理</span>
+                        <span class="selected" th:if="${b==1}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==2}? ' active open'">
+                    <a href="/payment/list" class="nav-link ">
+                        <span class="title">付款审批</span>
+                        <span class="selected" th:if="${b==2}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==3}? ' active open'">
+                    <a href="/diaryPurchase/list" class="nav-link ">
+                        <span class="title">日常采购</span>
+                        <span class="selected" th:if="${b==3}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==4}? ' active open'">
+                    <a href="/seal/list" class="nav-link ">
+                        <span class="title">签章使用</span>
+                        <span class="selected" th:if="${b==4}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==5}? ' active open'">
+                    <a href="/travel/list" class="nav-link ">
+                        <span class="title">出差申请</span>
+                        <span class="selected" th:if="${b==5}"></span>
+                    </a>
+                </li>
+                <shiro:hasPermission name="view_project">
+                <li class="nav-item" th:classappend="${b==6}? ' active open'">
+                    <a href="/project/list" class="nav-link ">
+                        <span class="title">项目管理</span>
+                        <span class="selected" th:if="${b==6}"></span>
+                    </a>
+                </li>
+                </shiro:hasPermission>
+                <li class="nav-item" th:classappend="${b==7}? ' active open'">
+                    <a href="/meeting/list" class="nav-link ">
+                        <span class="title">会议纪要</span>
+                        <span class="selected" th:if="${b==7}"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item" th:classappend="${a==9}? ' active open'">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-users"></i>
+                <span class="title">人事管理</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item" th:classappend="${b==0}? ' active open'">
+                    <a href="/personal/list" class="nav-link ">
+                        <span class="title">人员</span>
+                        <span class="selected" th:if="${b==0}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==1}? ' active open'">
+                    <a href="/attendance/list" class="nav-link ">
+                        <span class="title">工作记录</span>
+                        <span class="selected" th:if="${b==1}"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <shiro:hasRole name="super">
+        <li class="nav-item" th:classappend="${a==10}? ' active open'">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-settings"></i>
+                <span class="title">系统管理</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="nav-item" th:classappend="${b==0}? ' active open'">
+                    <a href="/user/list" class="nav-link ">
+                        <span class="title">用户管理</span>
+                        <span class="selected" th:if="${b==0}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==1}? ' active open'">
+                    <a href="/role/list" class="nav-link ">
+                        <span class="title">角色管理</span>
+                        <span class="selected" th:if="${b==1}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==2}? ' active open'">
+                    <a href="/permission/list" class="nav-link ">
+                        <span class="title">权限管理</span>
+                        <span class="selected" th:if="${b==2}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==3}? ' active open'">
+                    <a href="/enum/list" class="nav-link ">
+                        <span class="title">数据字典</span>
+                        <span class="selected" th:if="${b==3}"></span>
+                    </a>
+                </li>
+                <li class="nav-item" th:classappend="${b==4}? ' active open'">
+                    <a href="/log/list" class="nav-link ">
+                        <span class="title">系统日志</span>
+                        <span class="selected" th:if="${b==4}"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        </shiro:hasRole>
+    </ul>
+    <!-- END SIDEBAR MENU -->
+    <!-- END SIDEBAR MENU -->
+</div>
+<!-- END SIDEBAR -->

@@ -1,0 +1,66 @@
+server:
+  port: 8001
+  session:
+    timeout: 86400
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1/oms?characterEncoding=utf-8&useSSL=false
+    username: hrada
+    password: hrada
+    driver-class-name: com.mysql.jdbc.Driver
+
+    druid:
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+      max-wait: 60000
+      min-evictable-idle-time-millis: 300000
+      filters: stat,wall,log4j
+
+      stat-view-servlet:
+        login-username: admin
+        login-password: hrada123
+
+  jpa:
+      database: mysql
+      show-sql: false
+      hibernate:
+        ddl-auto: update
+        naming:
+          strategy: org.hibernate.cfg.DefaultComponentSafeNamingStrategy
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL5Dialect
+
+  thymeleaf :
+    cache: false
+    mode : LEGACYHTML5
+
+  mail:
+    host: smtp.mxhichina.com
+    port: 465
+    username: "sys@hrada.net"
+    password: "Hrada123"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
+            socketFactory:
+              class: javax.net.ssl.SSLSocketFactory
+
+  http:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+    spring.jackson.time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false

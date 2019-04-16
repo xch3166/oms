@@ -1,0 +1,76 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" >
+<!-- BEGIN HEADER INNER -->
+<div class="page-header-inner ">
+    <!-- BEGIN LOGO -->
+    <div class="page-logo">
+        <a href="index.html">
+            <img src="/assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" />
+        </a>
+        <div class="menu-toggler sidebar-toggler">
+            <span></span>
+        </div>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+        <span></span>
+    </a>
+    <!-- END RESPONSIVE MENU TOGGLER -->
+    <!-- BEGIN TOP NAVIGATION MENU -->
+    <div class="top-menu">
+        <ul class="nav navbar-nav pull-right">
+            <!-- BEGIN NOTIFICATION DROPDOWN -->
+            <!-- DOC: Apply "dropdown-dark" class after "dropdown-extended" to change the dropdown styte -->
+            <!-- DOC: Apply "dropdown-hoverable" class after below "dropdown" and remove data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to enable hover dropdown mode -->
+            <!-- DOC: Remove "dropdown-hoverable" and add data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to the below A element with dropdown-toggle class -->
+            <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <i class="icon-bell"></i>
+                    <span class="badge badge-default" th:text="${session.count}" th:if="${session.count!=0}"> 7  </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="external">
+                        <h3>消息通知</h3>
+                        <a href="/message/list">查看全部</a>
+                    </li>
+                    <li>
+                        <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283" th:if="${session.message!=null}">
+                            <li th:each="message : ${session.message}">
+                                <a href="javascript:;" th:href="${'/message/'+message.id}">
+                                    <span class="details" th:text="${message.title}"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <!-- END NOTIFICATION DROPDOWN -->
+            <!-- BEGIN USER LOGIN DROPDOWN -->
+            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+            <li class="dropdown dropdown-user">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <span class="username username-hide-on-mobile"> <shiro:principal property="name" /> </span>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-default">
+                    <li>
+                        <a href="/personal/update">
+                            <i class="icon-user"></i> 个人信息</a>
+                    </li>
+                    <li>
+                        <a href="/user/password">
+                            <i class="icon-user"></i> 修改密码</a>
+                    </li>
+                    <li>
+                        <a href="/logout">
+                            <i class="icon-key"></i> 退出 </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- END USER LOGIN DROPDOWN -->
+        </ul>
+    </div>
+    <!-- END TOP NAVIGATION MENU -->
+</div>
+<!-- END HEADER INNER -->

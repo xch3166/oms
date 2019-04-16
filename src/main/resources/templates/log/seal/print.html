@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    table {
+        width: 80%;
+        text-indent: 0;
+        margin: 0 auto;
+        border: 1px solid #dadada;
+    }
+
+    table td {
+        background: #fff;
+        padding: 10px;
+        word-break: break-all;
+        border-top: 1px solid #dadada;
+        border-right: 1px solid #dadada;
+    }
+
+    table th {
+        background: #fff;
+        padding-top: 30px;
+        padding-bottom: 20px;
+        text-align: center;
+    }
+    .br0{
+        border-right: 0;
+    }
+</style>
+<table th:object="${grn}">
+    <tr>
+        <th colspan="10">山东澜达石油设备有限公司签章使用</th>
+    </tr>
+    <tr>
+        <td>序号</td>
+        <td>申请人</td>
+        <td>用印名称</td>
+        <td>用印事由</td>
+        <td>用印类型</td>
+        <td>份数</td>
+        <td>用印时间</td>
+        <td class="br0">印章管理员</td>
+    </tr>
+    <tr th:each="detail : ${list}">
+        <td th:text="${detailStat.count}"></td>
+        <td th:text="${detail.applicant.name}"></td>
+        <td th:text="公章" th:if="${detail.name==0}"></td>
+        <td th:text="合同章" th:if="${detail.name==1}"></td>
+        <td th:text="法人人名章" th:if="${detail.name==2}"></td>
+        <td th:text="财务专用章" th:if="${detail.name==3}"></td>
+        <td th:text="发票专用章" th:if="${detail.name==4}"></td>
+        <td th:text="${detail.content}"></td>
+        <td th:text="用印" th:if="${detail.type==0}"></td>
+        <td th:text="外用" th:if="${detail.type==1}"></td>
+        <td th:text="${detail.count}"></td>
+        <td th:text="${detail.logDate}"></td>
+        <td th:text="王景丽" class="br0"></td>
+        <!--<td th:text="${detail.approver.name}" class="br0"></td>-->
+    </tr>
+</table>
+</html>
